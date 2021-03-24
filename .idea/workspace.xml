@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3cf47e1d-9af7-4142-91b2-45fa737383e5" name="Default Changelist" comment="Registered tables in admin.py">
-      <change afterPath="$PROJECT_DIR$/backyardBotanist/mainPageApp/appUrls.py" afterDir="false" />
+    <list default="true" id="3cf47e1d-9af7-4142-91b2-45fa737383e5" name="Default Changelist" comment="Added appletURL file. Program should now be able to access multiple urls and their content.">
+      <change afterPath="$PROJECT_DIR$/backyardBotanist/mainPageApp/templates/home.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backyardBotanist/backyardBotanist/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/backyardBotanist/backyardBotanist/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backyardBotanist/backyardBotanist/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/backyardBotanist/backyardBotanist/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backyardBotanist/mainPageApp/appUrls.py" beforeDir="false" afterPath="$PROJECT_DIR$/backyardBotanist/mainPageApp/appUrls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backyardBotanist/mainPageApp/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/backyardBotanist/mainPageApp/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -16,6 +17,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -47,9 +49,15 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\kayle\PycharmProjects\BackyardBotanist\backyardBotanist\mainPageApp\templates" />
+    </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -88,7 +96,14 @@
       <option name="project" value="LOCAL" />
       <updated>1616559171488</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Added appletURL file. Program should now be able to access multiple urls and their content.">
+      <created>1616560770907</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1616560770907</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -149,6 +164,7 @@
     <MESSAGE value="This is the initial commit, with the Plant Table made." />
     <MESSAGE value="Added tables to webpage via models.py" />
     <MESSAGE value="Registered tables in admin.py" />
-    <option name="LAST_COMMIT_MESSAGE" value="Registered tables in admin.py" />
+    <MESSAGE value="Added appletURL file. Program should now be able to access multiple urls and their content." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added appletURL file. Program should now be able to access multiple urls and their content." />
   </component>
 </project>
