@@ -1,14 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3cf47e1d-9af7-4142-91b2-45fa737383e5" name="Default Changelist" comment="Added tables to webpage via models.py">
+    <list default="true" id="3cf47e1d-9af7-4142-91b2-45fa737383e5" name="Default Changelist" comment="Registered tables in admin.py">
+      <change afterPath="$PROJECT_DIR$/backyardBotanist/mainPageApp/appUrls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backyardBotanist/mainPageApp/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/backyardBotanist/mainPageApp/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backyardBotanist/backyardBotanist/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/backyardBotanist/backyardBotanist/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backyardBotanist/mainPageApp/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/backyardBotanist/mainPageApp/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <favorite-branches>
@@ -72,7 +81,14 @@
       <option name="project" value="LOCAL" />
       <updated>1616558547626</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Registered tables in admin.py">
+      <created>1616559171488</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1616559171488</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -132,6 +148,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="This is the initial commit, with the Plant Table made." />
     <MESSAGE value="Added tables to webpage via models.py" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added tables to webpage via models.py" />
+    <MESSAGE value="Registered tables in admin.py" />
+    <option name="LAST_COMMIT_MESSAGE" value="Registered tables in admin.py" />
   </component>
 </project>
