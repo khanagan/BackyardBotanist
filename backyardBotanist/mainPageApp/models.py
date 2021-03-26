@@ -5,6 +5,10 @@ class Plant(models.Model):
     commonName = models.CharField(max_length=100)
     scientificName = models.CharField(max_length=100)
     yearLastDocumented = models.DateTimeField("year")
+    rankId = models.IntegerField()
+    groupId = models.IntegerField()
+    subgroupId = models.IntegerField()
+    statusId = models.IntegerField()
     
     class Meta:
         db_table = 'Plant'
@@ -27,8 +31,9 @@ class Group(models.Model):
         db_table = 'Group'
 
 class Subgroup(models.Model):
-    subgroupID = models.IntegerField()
+    subgroupId = models.IntegerField()
     taxSubgroup = models.CharField(max_length=100)
+    groupId = models.IntegerField()
     
     class Meta:
         db_table = 'Subgroup'
@@ -43,6 +48,8 @@ class Location(models.Model):
 class Pictures(models.Model):
     pictureId = models.IntegerField()
     imageFile = models.ImageField()
+    plantId = models.IntegerField()
+    userId = models.IntegerField()
     
     class Meta:
         db_table = 'Pictures'
@@ -55,12 +62,36 @@ class ConservationRank(models.Model):
     class Meta:
         db_table = 'ConservationRank'
    
-class ListingStatus:
+class ListingStatus(models.Model):
     statusId = models.IntegerField()
     federalStatus = models.CharField(max_length=100)
     stateStatus = models.CharField(max_length=100)
     
     class Meta:
         db_table = 'ListingStatus'
+     
+class Sighting(models.Model):
+    sightingId = models.IntegerField()
+    userId = models.IntegerField()
+    plantId = models.IntegerField()
+    county = models.CharField(max_length=100)
+    state = models.CharField(max_length=100)
     
+    class Meta:
+        db_table = 'Sighting'
+
+class ChangePassword(models.Model):
+    userId = models.IntegerField()
+    oldPass = models.CharField(max_length=100)
+    newPass = models.CharField(max_length=100)
     
+    class Meta:
+        db_table = 'ChangePassword'
+    
+class PlantLocation(models.Model):
+    plantId = models.IntegerField()
+    county = models.CharField(max_length=100)
+    state = models.CharField(max_length=100)
+    
+    class Meta:
+        db_table = 'PlantLocation'
