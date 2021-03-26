@@ -9,4 +9,7 @@ admin.site.register(Group)
 admin.site.register(Subgroup)
 admin.site.register(Pictures)
 admin.site.register(Location)
-
+admin.site.register(ListingStatus)
+admin.site.register(Sighting)
+admin.site.register(ChangePassword)
+admin.site.register(PlantLocation)

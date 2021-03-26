@@ -2,8 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3cf47e1d-9af7-4142-91b2-45fa737383e5" name="Default Changelist" comment="Homepage created with text, &quot;Backyard Botanist&quot;. Webpage creation should now be functional.">
+      <change afterPath="$PROJECT_DIR$/backyardBotanist/mainPageApp/templates/changePassword.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backyardBotanist/mainPageApp/templates/invalidUser.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backyardBotanist/backyardBotanist/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/backyardBotanist/backyardBotanist/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backyardBotanist/mainPageApp/appUrls.py" beforeDir="false" afterPath="$PROJECT_DIR$/backyardBotanist/mainPageApp/appUrls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backyardBotanist/mainPageApp/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/backyardBotanist/mainPageApp/templates/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backyardBotanist/mainPageApp/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/backyardBotanist/mainPageApp/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,7 +39,7 @@
     </favorite-branches>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="kayleighSandbox" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
