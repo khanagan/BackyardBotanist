@@ -10,7 +10,11 @@
 <input type="text" id="email" name="emailInput" style="font-family:Georgia">
 <h2 style="text-align:left;font-family:Georgia">Password</h2>
 <input type="password" id="password" name="passwordInput"><br>
-<a href="./invalidUser" onclick="navigate">Submit</a><br>
+{% if emailInput == emailInput %}
+    <a href="./databaseSearchPage" onclick="navigate">Submit</a><br>
+{% else %}
+    <a href="./invalidUser" onclick="navigate">Submit</a><br>
+{% endif %}
 <a href="./changePassword" onclick="navigate">Change Password?</a><br>
 <p style="text-align:left;font-family:Georgia">Create an Account</p>
 </body>
