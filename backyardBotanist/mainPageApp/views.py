@@ -4,7 +4,7 @@ from django.template import loader
 from .models import User
 from mainPageApp.models import Plant
 from mainPageApp.models import User
-from mainPageApp.models import Group
+from mainPageApp.models import TaxGroup
 from mainPageApp.models import Subgroup
 from mainPageApp.models import Subgroup
 from mainPageApp.models import Location
@@ -30,6 +30,23 @@ def invalidUser(request):
     page = loader.get_template('invalidUser.html')
     return HttpResponse(page.render())
 
-def displayData(request):
-    results=Plant.objects.all()
-    return render(request, "index.html", {"Plant": results})
+def displayReport1(request):
+    plants=Plant.objects.all()
+    #plants = Plant.objects.all().values('plantId','commonName','scientificName','yearLastDocumented','rankId','groupId','groupId__taxGroup','subgroupId','statusId')
+    return render(request, "reportPage1.html", {"Plant": plants})
+
+def displayReport2(request):
+    plants=Plant.objects.all()
+    #plants = Plant.objects.all().values('plantId','commonName','scientificName','yearLastDocumented','rankId','groupId','groupId__taxGroup','subgroupId','statusId')
+    return render(request, "reportPage2.html", {"Plant": plants})
+
+def displayReport3(request):
+    plants=Plant.objects.all()
+    #plants = Plant.objects.all().values('plantId','commonName','scientificName','yearLastDocumented','rankId','groupId','groupId__taxGroup','subgroupId','statusId')
+    return render(request, "reportPage3.html", {"Plant": plants})
+
+def displayReport4(request):
+    plants=Plant.objects.all()
+    #plants = Plant.objects.all().values('plantId','commonName','scientificName','yearLastDocumented','rankId','groupId','groupId__taxGroup','subgroupId','statusId')
+    return render(request, "reportPage4.html", {"Plant": plants})
+
