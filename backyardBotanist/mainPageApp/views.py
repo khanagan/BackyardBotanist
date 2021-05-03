@@ -31,8 +31,9 @@ def invalidUser(request):
     return HttpResponse(page.render())
 
 def displayReport1(request):
-    plants=Plant.objects.all()
+    #plants=Plant.objects.all()
     #plants = Plant.objects.all().values('plantId','commonName','scientificName','yearLastDocumented','rankId','groupId','groupId__taxGroup','subgroupId','statusId')
+    plants = Plant.objects.raw('SELECT 1 as id, plantId, commonName, scientificName, yearLastDocumented, rankID, groupID, subgroupID, statusID from Plant limit 10')
     return render(request, "reportPage1.html", {"Plant": plants})
 
 def displayReport2(request):
