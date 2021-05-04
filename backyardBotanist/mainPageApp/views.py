@@ -45,3 +45,8 @@ def displayReport3(request):
     #plants = Plant.objects.all().values('plantId','commonName','scientificName','yearLastDocumented','rankId','groupId','groupId__taxGroup','subgroupId','statusId')
     return render(request, "reportPage3.html", {"Plant": plants})
 
+def displayReport4(request):
+    plants=Plant.objects.all()
+    #plants = Plant.objects.all().values('plantId','commonName','scientificName','yearLastDocumented','rankId','groupId','groupId__taxGroup','subgroupId','statusId')
+    return render(request, "reportPage4.html", {"Plant": plants})
+

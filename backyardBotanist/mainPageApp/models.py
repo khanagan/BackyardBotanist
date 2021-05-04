@@ -2,9 +2,11 @@ from django.db import models
 
 # Create your models here.
 class Plant(models.Model):
+    plantId = models.IntegerField(primary_key=True)
     commonName = models.CharField(max_length=100)
     scientificName = models.CharField(max_length=100)
-    yearLastDocumented = models.DateTimeField("year")
+#    yearLastDocumented = models.DateTimeField("year")
+    yearLastDocumented = models.CharField(max_length=100)
     rankId = models.IntegerField()
     groupId = models.IntegerField()
     subgroupId = models.IntegerField()
