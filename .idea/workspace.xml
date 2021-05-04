@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< Updated upstream
     <list default="true" id="3cf47e1d-9af7-4142-91b2-45fa737383e5" name="Default Changelist" comment="Updates to html pages. Page to page navigation now possible. A modified settings.py will be in the next commit.">
       <change afterPath="$PROJECT_DIR$/backyardBotanist/mainPageApp/templates/databaseSearchPage.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
@@ -8,6 +9,12 @@
       <change beforePath="$PROJECT_DIR$/backyardBotanist/mainPageApp/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/backyardBotanist/mainPageApp/admin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backyardBotanist/mainPageApp/appUrls.py" beforeDir="false" afterPath="$PROJECT_DIR$/backyardBotanist/mainPageApp/appUrls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backyardBotanist/mainPageApp/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/backyardBotanist/mainPageApp/templates/home.html" afterDir="false" />
+=======
+    <list default="true" id="3cf47e1d-9af7-4142-91b2-45fa737383e5" name="Default Changelist" comment="Homepage created with text, &quot;Backyard Botanist&quot;. Webpage creation should now be functional.">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backyardBotanist/backyardBotanist/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/backyardBotanist/backyardBotanist/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backyardBotanist/mainPageApp/templates/reportPage2.html" beforeDir="false" afterPath="$PROJECT_DIR$/backyardBotanist/mainPageApp/templates/reportPage2.html" afterDir="false" />
+>>>>>>> Stashed changes
       <change beforePath="$PROJECT_DIR$/backyardBotanist/mainPageApp/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/backyardBotanist/mainPageApp/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
