@@ -10,13 +10,11 @@
             <tr>
                 <th>Common Name</th>
                 <th>Scientific Name</th>
-                <th>Group Name/th>
             </tr>
-            {% for CommonName, ScientificName, GroupName in PlantLocation %}
+            {% for CommonName, ScientificName in GroupList%}
             <tr>
                 <td>{{CommonName}}</td>
                 <td>{{ScientificName}}</td>
-                <td>{{GroupName}}</td>
             </tr>
             {% endfor %}
         </table>
