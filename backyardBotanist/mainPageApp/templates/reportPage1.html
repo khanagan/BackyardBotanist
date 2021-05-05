@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<head>
+    <title>View Report #1</title>
+</head>
+<body>
+    <center>
+        <h1>View Report #1</h1>
+        <hr/>
+        <table border="1">
+            <tr>
+                <th>PlantID</th>
+                <th>CommonName</th>
+                <th>ScientificName</th>
+                <th>YearLastDocumented</th>
+                <th>RankID</th>
+                <th>GroupID</th>
+                <th>SubgroupID</th>
+                <th>StatusID</th>
+            </tr>
+            {% for displayplant in Plant %}
+            <tr>
+                <td>{{displayplant.plantId}}</td>
+                <td>{{displayplant.commonName}}</td>
+                <td>{{displayplant.scientificName}}</td>
+                <td>{{displayplant.yearLastDocumented}}</td>
+                <td>{{displayplant.rankId}}</td>        
+                <td>{{displayplant.groupId}}</td>
+                <td>{{displayplant.subgroupId}}</td>
+                <td>{{displayplant.statusId}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </center>
+</body>
+</html>
