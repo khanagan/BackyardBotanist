@@ -4,21 +4,21 @@
     <meta charset="UTF-8">
     <title>Home</title>
 </head>
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'homeFormatting.css' %}">
 <body>
-<h1 style="text-align:center;font-family:Georgia">Welcome to Backyard Botanist!</h1>
-<form action="/databaseSearchPage" method="post">
+<h1 style="text-align:center;font-family:Arial">Welcome to Backyard Botanist!</h1>
+
+<form action="/databaseSearchPage" method="post" style="text-align:center">
     {% csrf_token %}
-    <h2 style="text-align:left;font-family:Georgia">Email</h2>
+    <h2 style="text-align:center;font-family:Arial">Email</h2>
     {{ form.email }}
-    <h2 style="text-align:left;font-family:Georgia">Password</h2>
+    <h2 style="text-align:center;font-family:Arial">Password</h2>
     {{ form.password }}
-    <input type="submit" value="Submit">
+    </br></br>
+    <input type="submit" value="Submit" class="center">
 </form>
-<!--{% if emailInput != emailInput %}
-    <a href="./databaseSearchPage" onclick="navigate">Submit</a><br>
-{% else %}
-    <a href="./invalidUser" onclick="navigate">Submit</a><br>
-{% endif %}-->
+</br>
 <a href="./changePassword" onclick="navigate">Change Password?</a><br>
 <a href="./createAccount" onclick="navigate">Create an Account</a><br>
 </body>
