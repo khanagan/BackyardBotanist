@@ -1,11 +1,15 @@
+import datetime
+
+from datetime import datetime
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.templatetags import static
 from django.shortcuts import get_object_or_404
 from django.db import connection
-from .models import User, Plant
-from .forms import userLoginForm
+from django.core.exceptions import *
+from .models import User, Plant, TaxGroup, Subgroup, Location, Pictures, ConservationRank, ListingStatus, Sighting, ChangePassword, PlantLocation
+from .forms import userLoginForm, userChangePasswordForm, addSightingForm, userCreateAccountForm, groupForm
 
 
 # Create your views here.
@@ -16,21 +20,100 @@ def home(request):
         form = userLoginForm(request.POST)
         if form.is_valid():
             email = form.cleaned_data['email']
-            if email == 'fake@email.com':
-                print("hi")
-    #        print(request.POST['email'])
+            password = form.cleaned_data['password']
             return HttpResponseRedirect('databaseSearchPage.html')
     else:
         form = userLoginForm()
     return render(request, 'home.html', {'form': form})
 
-def changePassword(request):
-    page = loader.get_template('changePassword.html')
-    return HttpResponse(page.render())
 
-def invalidUser(request, email):
+def changePassword(request):
+    #page = loader.get_template('changePassword.html')
+    #return HttpResponse(page.render())
+    if request.method == 'POST':
+        form = userChangePasswordForm(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data['email']
+            oldPassword = form.cleaned_data['oldPassword']
+            newPassword = form.cleaned_data['newPassword']
+            with connection.cursor() as cursor:
+                cursor.execute('SELECT email, password FROM User WHERE email LIKE "' + email + '" AND password LIKE "' + oldPassword + '"')
+                u = cursor.fetchall()
+            cursor.close()
+            if len(u) != 1:
+                return HttpResponseRedirect('invalidUser')
+            else:
+                User.objects.filter(email=email, password=oldPassword).update(password=newPassword)
+            return HttpResponseRedirect('databaseSearchPage')
+    else:
+        form = userChangePasswordForm()
+    return render(request, 'changePassword.html', {'form': form})
+
+def createAccount(request):
+    if request.method == 'POST':
+        form = userCreateAccountForm(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data['email']
+            password = form.cleaned_data['password']
+            confirmPassword = form.cleaned_data['confirmPassword']
+            with connection.cursor() as cursor:
+                cursor.execute('SELECT email, password FROM User WHERE email LIKE "' + email + '" AND password LIKE "' + password + '"')
+                u = cursor.fetchall()
+            cursor.close()
+            if len(u) > 0:
+                return HttpResponseRedirect('invalidUser')
+            else:
+                with connection.cursor() as cursor:
+                    cursor.execute('SELECT max(UserID) FROM User')
+                    u2 = cursor.fetchall()
+                cursor.close()
+                User.objects.create(email=email, password=password, userId=(u2[0][0] + 1), numSightings=0, joinDate=datetime.today())
+            return HttpResponseRedirect('databaseSearchPage')
+    else:
+        form = userCreateAccountForm()
+    return render(request, 'createAccount.html', {'form': form})
+
+def invalidUser(request):
     page = loader.get_template('invalidUser.html')
     return HttpResponse(page.render())
+
+def displayReport1raw(request):
+    plants = Plant.objects.raw('select 1 as id, plantId, commonName, rankId, groupId, subgroupId, statusId from Plant order by yearLastDocumented desc limit 10')
+    return render(request, "reportPage1raw.html", {"Plant": plants})
+
+def displayReport1ORM(request):
+    plants = Plant.objects.all().values('plantId','commonName','scientificName','yearLastDocumented','rankId','groupId','subgroupId','statusId').order_by('-yearLastDocumented')[:10]
+    return render(request, "reportPage1ORM.html", {"Plant": plants})
+
+def addSighting(request):
+    if request.method == 'POST':
+        form = addSightingForm(request.POST)
+        if form.is_valid():
+            sightingid = form.cleaned_data['sightingid']
+            userid = form.cleaned_data['userid']
+            plantid = form.cleaned_data['plantid']
+            county = form.cleaned_data['county']
+            state = form.cleaned_data['state']
+            row = Sighting(sightingId = sightingid, userId = userid, plantId = plantid, county = county, state = state)
+            row.save()
+            return HttpResponseRedirect('addedSighting')
+    else:
+        form = addSightingForm()
+    return render(request, 'addSighting.html', {'form': form})
+
+def addedSighting(request):
+#    page = loader.get_template('addedSighting.html')
+#    if request.method == 'POST':
+#        form = addSightingForm(request.POST)
+#        print(form)
+#        if form.is_valid():
+#            sightingid = form.cleaned_data['sightingid']
+#            userid = form.cleaned_data['userid']
+##            plantid = form.cleaned_data['plantid']
+#            county = form.cleaned_data['county']
+#            state = form.cleaned_data['state']
+    sightings = Plant.objects.all()
+    return render(request, 'addedSighting.html', {'sighting':sightings})
 
 def databaseSearchPage(request):
     page = loader.get_template('databaseSearchPage.html')
@@ -39,45 +122,59 @@ def databaseSearchPage(request):
         print(form)
         if form.is_valid():
             email = form.cleaned_data['email']
-            #The value email will include the user's email input from the first page
+            password = form.cleaned_data['password']
+            #Verifies existance of user, if exists proceed to view DB, else display invalid User
+            with connection.cursor() as cursor:
+                cursor.execute('SELECT email, password FROM User WHERE email LIKE "' + email + '" AND password LIKE "' + password + '"')
+                u = cursor.fetchall()
+            cursor.close()
+            if len(u) != 1:
+                return HttpResponseRedirect('invalidUser')
     return HttpResponse(page.render())
 
-def displayReport1(request):
-    #plants=Plant.objects.all()
-    #plants = Plant.objects.all().values('plantId','commonName','scientificName','yearLastDocumented','rankId','groupId','groupId__taxGroup','subgroupId','statusId')
-    plants = Plant.objects.raw('SELECT 1 as id, plantId, commonName, scientificName, yearLastDocumented, rankID, groupID, subgroupID, statusID from Plant limit 10')
-    print(plants)
-    return render(request, "reportPage1.html", {"Plant": plants})
-
 def displayReport2(request):
-    plants=Plant.objects.all()
-    #plants = Plant.objects.all().values('plantId','commonName','scientificName','yearLastDocumented','rankId','groupId','groupId__taxGroup','subgroupId','statusId')
     with connection.cursor() as cursor:
         cursor.execute("SELECT PlantID, CommonName, ScientificName, YearLastDocumented, Plant.StatusID AS StatusID, FederalListingStatus, StateListingStatus FROM Plant, ListingStatus WHERE Plant.StatusID = ListingStatus.StatusID")
         plantListing = cursor.fetchall()
     #print(plantListing)
+    cursor.close()
     return render(request, "reportPage2.html", {"PlantLocation": plantListing})
 
-def group(request):
+
+def groupSearchPage(request):
+    groupName = "Flowering Plants"
     if request.method == 'POST':
-        form = Form(request.POST)
+        form = groupSearchForm(request.POST)
         if form.is_valid():
             groupName = groupForm.cleaned_data['group']
             return HttpResponseRedirect('groupSearchPage.html')
     else:
         form = groupForm()
-    return(groupName)
+    return render(request, 'groupSearchPage.html', {'form': form})
 
 def displayReport3(request):
-    plants=Plant.objects.all()
-    groupName = group(request)
+    #groupNo = group(request)
+    groupNo = "Flowering Plants"
     with connection.cursor() as cursor:
-        cursor.execute("SELECT Plant.CommonName, Plant.ScientificName,  Subgroup.taxSubgroup FROM Plant JOIN TaxGroup ON Plant.groupID = Group.groupID WHERE TaxGroup.taxGroup = groupName")
+        sql = ('SELECT CommonName, ScientificName FROM TaxGroup RIGHT JOIN Plant ON Plant.groupId = TaxGroup.groupId WHERE TaxGroup.groupId = %s ')
+        cursor.execute(sql, groupNo)
+        #cursor.execute('SELECT CommonName, ScientificName FROM TaxGroup RIGHT JOIN Plant ON Plant.groupId = TaxGroup.groupId WHERE Plant.groupId = "' + groupNo + '"')
+        # JOIN Subgroup ON Plant.subgroupId = Subgroup.subgroupId
+        #
         groupListing = cursor.fetchall()
+    cursor.close()
     return render(request, "reportPage3.html", {"GroupList": groupListing})
 
 def displayReport4(request):
-    plants=Plant.objects.all()
-    #plants = Plant.objects.all().values('plantId','commonName','scientificName','yearLastDocumented','rankId','groupId','groupId__taxGroup','subgroupId','statusId')
-    return render(request, "reportPage4.html", {"Plant": plants})
+    #groupName = group(request)
+    groupNo = 3
+    with connection.cursor() as cursor:
+        sql = ('SELECT CommonName, ScientificName FROM Plant LEFT JOIN Subgroup ON Plant.subgroupId = Subgroup.subgroupId WHERE Plant.groupId = %s ')
+        cursor.execute(sql, groupNo)
+                       # 'WHERE Subgroup.taxSubgroup LIKE "' + groupName + '"')
+        # JOIN Subgroup ON Plant.subgroupId = Subgroup.subgroupId
+        #
+        groupListing = cursor.fetchall()
+    cursor.close()
+    return render(request, "reportPage4.html", {"GroupList": groupListing})
 
