@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<head>
+    <title>View Report #2</title>
+</head>
+<body>
+    <center>
+        <h1>View Report #2</h1>
+        <hr/>
+        <table border="1">
+            <tr>
+                <th>PlantID</th>
+                <th>Common Name</th>
+                <th>Scientific Name</th>
+                <th>Year Last Documented</th>
+                <th>Status ID</th>
+                <th>Federal Listing Status</th>
+                <th>State Listing Status</th>
+            </tr>
+            {% for PlantID, CommonName, ScientificName, YearLastDocumented, StatusID, FederalListingStatus, StateListingStatus in PlantLocation %}
+            <tr>
+                <td>{{PlantID}}</td>
+                <td>{{CommonName}}</td>
+                <td>{{ScientificName}}</td>
+                <td>{{YearLastDocumented}}</td>
+                <td>{{StatusID}}</td>
+                <td>{{FederalListingStatus}}</td>
+                <td>{{StateListingStatus}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </center>
+</body>
+</html>
