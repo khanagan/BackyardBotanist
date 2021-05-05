@@ -9,7 +9,7 @@ from django.shortcuts import get_object_or_404
 from django.db import connection
 from django.core.exceptions import *
 from .models import User, Plant, TaxGroup, Subgroup, Location, Pictures, ConservationRank, ListingStatus, Sighting, ChangePassword, PlantLocation
-from .forms import userLoginForm, userChangePasswordForm, addSightingForm, userCreateAccountForm, groupForm
+from .forms import userLoginForm, userChangePasswordForm, addSightingForm, userCreateAccountForm, groupForm, subGroupForm
 
 
 # Create your views here.
@@ -140,41 +140,38 @@ def displayReport2(request):
     cursor.close()
     return render(request, "reportPage2.html", {"PlantLocation": plantListing})
 
-
-def groupSearchPage(request):
-    groupName = "Flowering Plants"
-    if request.method == 'POST':
-        form = groupSearchForm(request.POST)
-        if form.is_valid():
-            groupName = groupForm.cleaned_data['group']
-            return HttpResponseRedirect('groupSearchPage.html')
-    else:
-        form = groupForm()
-    return render(request, 'groupSearchPage.html', {'form': form})
-
 def displayReport3(request):
-    #groupNo = group(request)
-    groupNo = "Flowering Plants"
+    groupNo = 3
     with connection.cursor() as cursor:
-        sql = ('SELECT CommonName, ScientificName FROM TaxGroup RIGHT JOIN Plant ON Plant.groupId = TaxGroup.groupId WHERE TaxGroup.groupId = %s ')
+        sql = ('SELECT CommonName, ScientificName '
+               'FROM TaxGroup RIGHT JOIN Plant ON Plant.groupId = TaxGroup.groupId '
+               'WHERE TaxGroup.groupId = %s ')
         cursor.execute(sql, groupNo)
-        #cursor.execute('SELECT CommonName, ScientificName FROM TaxGroup RIGHT JOIN Plant ON Plant.groupId = TaxGroup.groupId WHERE Plant.groupId = "' + groupNo + '"')
-        # JOIN Subgroup ON Plant.subgroupId = Subgroup.subgroupId
-        #
         groupListing = cursor.fetchall()
     cursor.close()
     return render(request, "reportPage3.html", {"GroupList": groupListing})
 
+def groupSearchPage(request):
+    if request.method == 'POST':
+        form = groupForm(request.POST)
+       # if form.is_valid():
+       #     groupNo = form.cleaned_data['GroupNo.']
+    return render(request, 'groupSearchPage.html')
+
 def displayReport4(request):
-    #groupName = group(request)
     groupNo = 3
     with connection.cursor() as cursor:
-        sql = ('SELECT CommonName, ScientificName FROM Plant LEFT JOIN Subgroup ON Plant.subgroupId = Subgroup.subgroupId WHERE Plant.groupId = %s ')
+        sql = ('SELECT CommonName, ScientificName '
+               'FROM Subgroup RIGHT JOIN Plant ON Plant.groupId = Subgroup.groupId '
+               'WHERE Subgroup.groupId = %s ')
         cursor.execute(sql, groupNo)
-                       # 'WHERE Subgroup.taxSubgroup LIKE "' + groupName + '"')
-        # JOIN Subgroup ON Plant.subgroupId = Subgroup.subgroupId
-        #
         groupListing = cursor.fetchall()
     cursor.close()
     return render(request, "reportPage4.html", {"GroupList": groupListing})
 
+def subGroupSearchPage(request):
+    if request.method == 'POST':
+        form = groupForm(request.POST)
+       # if form.is_valid():
+       #     groupNo = form.cleaned_data['GroupNo.']
+    return render(request, 'subGroupSearchPage.html')
