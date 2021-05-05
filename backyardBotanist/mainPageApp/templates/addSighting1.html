@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Plant Sighting</title>
+</head>
+<body>
+
+<h2 style="text-align:left;font-family:Georgia">SightingID</h2>
+<form action="/addSighting2" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Submit">
+</form>
+
+<h2 style="text-align:left;font-family:Georgia">UserId</h2>
+
+<h2 style="text-align:left;font-family:Georgia">PlantId</h2>
+
+<h2 style="text-align:left;font-family:Georgia">County</h2>
+
+<h2 style="text-align:left;font-family:Georgia">State</h2>
+
+<a href="./addSighting2" onclick="navigate">Add This Sighting</a><br>
+</body>
+</html>
+
