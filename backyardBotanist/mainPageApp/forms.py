@@ -9,3 +9,10 @@ class userChangePasswordForm(forms.Form):
     oldPassword = forms.CharField(max_length=30)
     newPassword = forms.CharField(max_length=30)
 
+class addSightingForm(forms.Form):
+    sightingid = forms.CharField(max_length=30)
+    userid = forms.CharField(max_length=30)
+    plantid = forms.CharField(max_length=30)
+    county = forms.CharField(max_length=30)
+    state = forms.CharField(max_length=30)
+

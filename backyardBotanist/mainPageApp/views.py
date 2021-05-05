@@ -4,8 +4,9 @@ from django.template import loader
 from django.templatetags import static
 from django.shortcuts import get_object_or_404
 from django.db import connection
-from .models import User, Plant
-from .forms import userLoginForm, userChangePasswordForm
+from django.core.exceptions import *
+from .models import User, Plant, TaxGroup, Subgroup, Location, Pictures, ConservationRank, ListingStatus, Sighting, ChangePassword, PlantLocation
+from .forms import userLoginForm, userChangePasswordForm, addSightingForm
 
 
 # Create your views here.
@@ -49,6 +50,44 @@ def invalidUser(request):
     page = loader.get_template('invalidUser.html')
     return HttpResponse(page.render())
 
+def displayReport1raw(request):
+    plants = Plant.objects.raw('select 1 as id, plantId, commonName, rankId, groupId, subgroupId, statusId from Plant order by yearLastDocumented desc limit 10')
+    return render(request, "reportPage1raw.html", {"Plant": plants})
+
+def displayReport1ORM(request):
+    plants = Plant.objects.all().values('plantId','commonName','scientificName','yearLastDocumented','rankId','groupId','subgroupId','statusId').order_by('-yearLastDocumented')[:10]
+    return render(request, "reportPage1ORM.html", {"Plant": plants})
+
+def addSighting(request):
+    if request.method == 'POST':
+        form = addSightingForm(request.POST)
+        if form.is_valid():
+            sightingid = form.cleaned_data['sightingid']
+            userid = form.cleaned_data['userid']
+            plantid = form.cleaned_data['plantid']
+            county = form.cleaned_data['county']
+            state = form.cleaned_data['state']
+            row = Sighting(sightingId = sightingid, userId = userid, plantId = plantid, county = county, state = state)
+            row.save()
+            return HttpResponseRedirect('addedSighting')
+    else: 
+        form = addSightingForm()
+    return render(request, 'addSighting.html', {'form': form})
+
+def addedSighting(request):
+#    page = loader.get_template('addedSighting.html')
+#    if request.method == 'POST':
+#        form = addSightingForm(request.POST)
+#        print(form)
+#        if form.is_valid():
+#            sightingid = form.cleaned_data['sightingid']
+#            userid = form.cleaned_data['userid']
+##            plantid = form.cleaned_data['plantid']
+#            county = form.cleaned_data['county']
+#            state = form.cleaned_data['state']
+    sightings = Plant.objects.all()         
+    return render(request, 'addedSighting.html', {'sighting':sightings})
+
 def databaseSearchPage(request):
     page = loader.get_template('databaseSearchPage.html')
     if request.method == "POST":
@@ -66,13 +105,6 @@ def databaseSearchPage(request):
                 return HttpResponseRedirect('invalidUser')
     return HttpResponse(page.render())
 
-def displayReport1(request):
-    #plants=Plant.objects.all()
-    #plants = Plant.objects.all().values('plantId','commonName','scientificName','yearLastDocumented','rankId','groupId','groupId__taxGroup','subgroupId','statusId')
-    plants = Plant.objects.raw('SELECT 1 as id, plantId, commonName, scientificName, yearLastDocumented, rankID, groupID, subgroupID, statusID from Plant limit 10')
-    print(plants)
-    return render(request, "reportPage1.html", {"Plant": plants})
-
 def displayReport2(request):
     with connection.cursor() as cursor:
         cursor.execute("SELECT PlantID, CommonName, ScientificName, YearLastDocumented, Plant.StatusID AS StatusID, FederalListingStatus, StateListingStatus FROM Plant, ListingStatus WHERE Plant.StatusID = ListingStatus.StatusID")
@@ -83,11 +115,9 @@ def displayReport2(request):
 
 def displayReport3(request):
     plants=Plant.objects.all()
-    #plants = Plant.objects.all().values('plantId','commonName','scientificName','yearLastDocumented','rankId','groupId','groupId__taxGroup','subgroupId','statusId')
     return render(request, "reportPage3.html", {"Plant": plants})
 
 def displayReport4(request):
     plants=Plant.objects.all()
-    #plants = Plant.objects.all().values('plantId','commonName','scientificName','yearLastDocumented','rankId','groupId','groupId__taxGroup','subgroupId','statusId')
     return render(request, "reportPage4.html", {"Plant": plants})
 
