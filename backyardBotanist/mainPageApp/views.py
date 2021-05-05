@@ -116,7 +116,7 @@ def addedSighting(request):
     return render(request, 'addedSighting.html', {'sighting':sightings})
 
 def databaseSearchPage(request):
-    page = loader.get_template('databaseSearchPage.html')
+    #page = loader.get_template('databaseSearchPage.html')
     if request.method == "POST":
         form = userLoginForm(request.POST)
         print(form)
@@ -130,7 +130,12 @@ def databaseSearchPage(request):
             cursor.close()
             if len(u) != 1:
                 return HttpResponseRedirect('invalidUser')
-    return HttpResponse(page.render())
+    with connection.cursor() as cursor:
+        cursor.execute(
+            "SELECT PlantID, CommonName, ScientificName, YearLastDocumented FROM Plant")
+        plantList = cursor.fetchall()
+    cursor.close()
+    return render(request, "databaseSearchPage.html", {"PlantList": plantList})
 
 def displayReport2(request):
     with connection.cursor() as cursor:

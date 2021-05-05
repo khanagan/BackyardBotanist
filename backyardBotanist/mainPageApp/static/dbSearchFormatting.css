@@ -2,3 +2,15 @@ databaseSearchPage,
 td {
     border: 5px solid #7FFFD4;
 }
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    grid-auto-rows: minmax(100px, auto)
+}
+
+.links {
+    grid-column: 3;
+    grid-row: 2;
+}

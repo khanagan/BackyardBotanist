@@ -7,27 +7,38 @@
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'dbSearchFormatting.css' %}">
 <body>
+<div class="grid">
+    <div class="links">
+        <h2>Check out These Pre-Generated Searches For More Detailed Looks at the Plant Database:</h2>
+        <ul>
+            <li>
+                <a href="./displayReport1raw" onclick="navigate">View Plants by Year Documented</a><br>
+            </li>
+            <li>
+                <a href="./displayReport2" onclick="navigate">View All Plants' Endangered Status</a><br>
+            </li>
+            <li>
+                <a href="./displayReport3" onclick="navigate">View Plant Report 3</a><br>
+            </li>
+            <li>
+                <a href="./displayReport4" onclick="navigate">View Plant Report 4</a><br>
+            </li>
+        </ul>
+    </div>
+</div>
 <table border="1">
             <tr>
                 <th>PlantID</th>
                 <th>CommonName</th>
                 <th>ScientificName</th>
                 <th>YearLastDocumented</th>
-                <th>RankID</th>
-                <th>GroupID</th>
-                <th>SubgroupID</th>
-                <th>StatusID</th>
             </tr>
-            {% for displayplant in Plant %}
+            {% for PlantID, CommonName, ScientificName, YearLastDocumented in PlantList %}
             <tr>
-                <td>{{displayplant.plantId}}</td>
-                <td>{{displayplant.commonName}}</td>
-                <td>{{displayplant.scientificName}}</td>
-                <td>{{displayplant.yearLastDocumented}}</td>
-                <td>{{displayplant.rankId}}</td>
-                <td>{{displayplant.groupId}}</td>
-                <td>{{displayplant.subgroupId}}</td>
-                <td>{{displayplant.statusId}}</td>
+                <td>{{PlantID}}</td>
+                <td>{{CommonName}}</td>
+                <td>{{ScientificName}}</td>
+                <td>{{YearLastDocumented}}</td>
             </tr>
             {% endfor %}
         </table>
