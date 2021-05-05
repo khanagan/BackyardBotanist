@@ -12,5 +12,5 @@ urlpatterns = [
     path('displayReport4', views.displayReport4, name='displayReport4'),
     path('addSighting', views.addSighting, name='addSighting'),
     path('addedSighting', views.addedSighting, name='addedSighting'),
+    path('databaseSearchPage', views.databaseSearchPage, name='databaseSearchPage'),
 ]
-
