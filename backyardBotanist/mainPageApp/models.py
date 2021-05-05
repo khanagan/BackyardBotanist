@@ -23,6 +23,7 @@ class Plant(models.Model):
     
     class Meta:
         db_table = 'Plant'
+        indexes = [models.Index(fields=['yearLastDocumented',]),]
 
 class User(models.Model):
     userId = models.IntegerField(primary_key=True)
@@ -33,6 +34,8 @@ class User(models.Model):
     
     class Meta:
         db_table = 'User'
+        indexes = [models.Index(fields=['email','password',]),]
+
 
 class Subgroup(models.Model):
     subgroupId = models.IntegerField(primary_key=True)
@@ -73,6 +76,7 @@ class ListingStatus(models.Model):
     
     class Meta:
         db_table = 'ListingStatus'
+        indexes = [models.Index(fields=['statusId',]),]
      
 class Sighting(models.Model):
     sightingId = models.IntegerField(primary_key=True)
