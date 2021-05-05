@@ -5,19 +5,29 @@
     <title>databaseSearchPage</title>
 </head>
 <body>
-<table>
-    <tbody>
-    <tr>
-        <th>Plant Common Name</th>
-        <td>a</td>
-        <th>Scientific Name</th>
-        <td>b</td>
-        <th>Year Last Documented</th>
-        <td>c</td>
-        <th>Federal Listing Status</th>
-        <td>d</td>
-    </tr>
-    </tbody>
-</table>
+<table border="1">
+            <tr>
+                <th>PlantID</th>
+                <th>CommonName</th>
+                <th>ScientificName</th>
+                <th>YearLastDocumented</th>
+                <th>RankID</th>
+                <th>GroupID</th>
+                <th>SubgroupID</th>
+                <th>StatusID</th>
+            </tr>
+            {% for displayplant in Plant %}
+            <tr>
+                <td>{{displayplant.plantId}}</td>
+                <td>{{displayplant.commonName}}</td>
+                <td>{{displayplant.scientificName}}</td>
+                <td>{{displayplant.yearLastDocumented}}</td>
+                <td>{{displayplant.rankId}}</td>
+                <td>{{displayplant.groupId}}</td>
+                <td>{{displayplant.subgroupId}}</td>
+                <td>{{displayplant.statusId}}</td>
+            </tr>
+            {% endfor %}
+        </table>
 </body>
 </html>

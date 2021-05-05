@@ -81,7 +81,6 @@ def databaseSearchPage(request):
     page = loader.get_template('databaseSearchPage.html')
     if request.method == "POST":
         form = userLoginForm(request.POST)
-        print(form)
         if form.is_valid():
             email = form.cleaned_data['email']
             password = form.cleaned_data['password']
@@ -92,7 +91,9 @@ def databaseSearchPage(request):
             cursor.close()
             if len(u) != 1:
                 return HttpResponseRedirect('invalidUser')
-    return HttpResponse(page.render())
+    plants = Plant.objects.raw('SELECT 1 as id, plantId, commonName, scientificName, yearLastDocumented, rankID, groupID, subgroupID, statusID from Plant limit 10')
+    #return HttpResponse(page.render())
+    return render(request, "databaseSearchPage.html", {"Plant": plants})
 
 def displayReport1(request):
     #plants=Plant.objects.all()
