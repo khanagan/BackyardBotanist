@@ -14,6 +14,12 @@ class userCreateAccountForm(forms.Form):
     password = forms.CharField(max_length=30)
     confirmPassword = forms.CharField(max_length=30)
 
+class deleteAccountForm(forms.Form):
+    userID = forms.IntegerField()
+
+class searchPlantForm(forms.Form):
+    plant = forms.CharField(max_length=100)
+
 class addSightingForm(forms.Form):
     sightingid = forms.CharField(max_length=30)
     userid = forms.CharField(max_length=30)

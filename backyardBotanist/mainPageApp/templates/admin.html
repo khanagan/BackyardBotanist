@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin</title>
+</head>
+<body>
+<h1 style="text-align:center;font-family:Georgia">View Users and Delete Them From System</h1>
+<form action="/admin" method="post">
+    {% csrf_token %}
+    <h2 style="text-align:left;font-family:Georgia">Delete User by ID</h2>
+    {{ form.userID }}
+    <input type="submit" value="Submit">
+</form>
+</br>
+<table border="1">
+            <tr>
+                <th>UserID</th>
+                <th>Email</th>
+                <th>Join Date</th>
+                <th>Number of Sightings</th>
+            </tr>
+            {% for UserID, email, joinDate, numSightings in UserList %}
+            <tr>
+                <td>{{UserID}}</td>
+                <td>{{email}}</td>
+                <td>{{joinDate}}</td>
+                <td>{{numSightings}}</td>
+            </tr>
+            {% endfor %}
+</table>
+</body>
+</html>

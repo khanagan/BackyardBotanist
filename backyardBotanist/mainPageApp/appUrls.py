@@ -6,6 +6,7 @@ urlpatterns = [
     path('changePassword', views.changePassword, name='changePassword'),
     path('invalidUser', views.invalidUser, name='invalidUser'),
     path('createAccount', views.createAccount, name='createAccount'),
+    path('admin', views.admin, name='admin'),
     path('displayReport1raw', views.displayReport1raw, name='displayReport1raw'),
     path('displayReport1ORM', views.displayReport1ORM, name='displayReport1ORM'),
     path('displayReport2', views.displayReport2, name='displayReport2'),

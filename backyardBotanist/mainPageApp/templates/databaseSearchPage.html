@@ -7,12 +7,22 @@
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'dbSearchFormatting.css' %}">
 <body>
+<h1 style="text-align:center;font-family:Arial">Search For Plants!</h1>
+<form action="/databaseSearchPage" method="post">
+    {% csrf_token %}
+    <h2 style="text-align:left;font-family:Arial">Search</h2>
+    {{ form }}
+    <input type="submit" value="Submit">
+</form>
 <div class="grid">
     <div class="links">
         <h2>Check out These Pre-Generated Searches For More Detailed Looks at the Plant Database:</h2>
         <ul>
             <li>
-                <a href="./displayReport1raw" onclick="navigate">View Plants by Year Documented</a><br>
+                <a href="./displayReport1raw" onclick="navigate">View Plants by Year Documented (Raw)</a><br>
+            </li>
+            <li>
+                <a href="./displayReport1ORM" onclick="navigate">View Plants by Year Documented (ORM)</a><br>
             </li>
             <li>
                 <a href="./displayReport2" onclick="navigate">View All Plants' Endangered Status</a><br>
@@ -41,6 +51,6 @@
                 <td>{{YearLastDocumented}}</td>
             </tr>
             {% endfor %}
-        </table>
+</table>
 </body>
 </html>
