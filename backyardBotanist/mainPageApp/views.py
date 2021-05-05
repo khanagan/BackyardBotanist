@@ -5,7 +5,7 @@ from django.templatetags import static
 from django.shortcuts import get_object_or_404
 from django.db import connection
 from .models import User, Plant
-from .forms import userLoginForm
+from .forms import userLoginForm, userChangePasswordForm
 
 
 # Create your views here.
@@ -24,8 +24,26 @@ def home(request):
 
 
 def changePassword(request):
-    page = loader.get_template('changePassword.html')
-    return HttpResponse(page.render())
+    #page = loader.get_template('changePassword.html')
+    #return HttpResponse(page.render())
+    if request.method == 'POST':
+        form = userChangePasswordForm(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data['email']
+            oldPassword = form.cleaned_data['oldPassword']
+            newPassword = form.cleaned_data['newPassword']
+            with connection.cursor() as cursor:
+                cursor.execute('SELECT email, password FROM User WHERE email LIKE "' + email + '" AND password LIKE "' + oldPassword + '"')
+                u = cursor.fetchall()
+            cursor.close()
+            if len(u) != 1:
+                return HttpResponseRedirect('invalidUser')
+            else:
+                User.objects.filter(email=email, password=oldPassword).update(password=newPassword)
+            return HttpResponseRedirect('databaseSearchPage')
+    else:
+        form = userChangePasswordForm()
+    return render(request, 'changePassword.html', {'form': form})
 
 def invalidUser(request):
     page = loader.get_template('invalidUser.html')
