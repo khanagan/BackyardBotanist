@@ -11,6 +11,6 @@ urlpatterns = [
     path('displayReport3', views.displayReport3, name='displayReport3'),
     path('displayReport4', views.displayReport4, name='displayReport4'),
     path('addSighting', views.addSighting, name='addSighting'),
-    path('updateRank', views.updateRank, name='updateRank'),
+    path('addedSighting', views.addedSighting, name='addedSighting'),
 ]
 
