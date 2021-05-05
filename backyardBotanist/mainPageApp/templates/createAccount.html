@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>createAccount</title>
+</head>
+<body>
+<h1 style="text-align:center;font-family:Georgia">Welcome to Backyard Botanist, Lets Create an Account</h1>
+<form action="/createAccount" method="post">
+    {% csrf_token %}
+    <h2 style="text-align:left;font-family:Georgia">Email</h2>
+    {{ form.email }}
+    <h2 style="text-align:left;font-family:Georgia">Password</h2>
+    {{ form.password }}
+  <h2 style="text-align:left;font-family:Georgia">Confirm Password</h2>
+    {{ form.confirmPassword }}
+    <input type="submit" value="Submit">
+</form>
+</body>
+</html>

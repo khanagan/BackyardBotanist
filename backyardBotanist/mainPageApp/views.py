@@ -1,3 +1,6 @@
+import datetime
+
+from datetime import datetime
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
@@ -5,7 +8,7 @@ from django.templatetags import static
 from django.shortcuts import get_object_or_404
 from django.db import connection
 from .models import User, Plant
-from .forms import userLoginForm, userChangePasswordForm
+from .forms import userLoginForm, userChangePasswordForm, userCreateAccountForm
 
 
 # Create your views here.
@@ -44,6 +47,31 @@ def changePassword(request):
     else:
         form = userChangePasswordForm()
     return render(request, 'changePassword.html', {'form': form})
+
+def createAccount(request):
+    if request.method == 'POST':
+        form = userCreateAccountForm(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data['email']
+            password = form.cleaned_data['password']
+            confirmPassword = form.cleaned_data['confirmPassword']
+            with connection.cursor() as cursor:
+                cursor.execute('SELECT email, password FROM User WHERE email LIKE "' + email + '" AND password LIKE "' + password + '"')
+                u = cursor.fetchall()
+            cursor.close()
+            if len(u) > 0:
+                return HttpResponseRedirect('invalidUser')
+            else:
+                with connection.cursor() as cursor:
+                    cursor.execute('SELECT max(UserID) FROM User')
+                    u2 = cursor.fetchall()
+                cursor.close()
+                User.objects.create(email=email, password=password, userId=(u2[0][0] + 1), numSightings=0, joinDate=datetime.today())
+            return HttpResponseRedirect('databaseSearchPage')
+    else:
+        form = userCreateAccountForm()
+    return render(request, 'createAccount.html', {'form': form})
+
 
 def invalidUser(request):
     page = loader.get_template('invalidUser.html')
