@@ -6,14 +6,14 @@
 </head>
 <body>
 <h1 style="text-align:center;font-family:Georgia">Welcome to Backyard Botanist!</h1>
-<h2 style="text-align:left;font-family:Georgia">Email</h2>
 <form action="/databaseSearchPage" method="post">
     {% csrf_token %}
-    {{ form }}
+    <h2 style="text-align:left;font-family:Georgia">Email</h2>
+    {{ form.email }}
+    <h2 style="text-align:left;font-family:Georgia">Password</h2>
+    {{ form.password }}
     <input type="submit" value="Submit">
 </form>
-<h2 style="text-align:left;font-family:Georgia">Password</h2>
-<input type="password" id="password" name="password"><br>
 <!--{% if emailInput != emailInput %}
     <a href="./databaseSearchPage" onclick="navigate">Submit</a><br>
 {% else %}

@@ -16,9 +16,7 @@ def home(request):
         form = userLoginForm(request.POST)
         if form.is_valid():
             email = form.cleaned_data['email']
-            if email == 'fake@email.com':
-                print("hi")
-    #        print(request.POST['email'])
+            password = form.cleaned_data['password']
             return HttpResponseRedirect('databaseSearchPage.html')
     else:
         form = userLoginForm()
@@ -29,7 +27,7 @@ def changePassword(request):
     page = loader.get_template('changePassword.html')
     return HttpResponse(page.render())
 
-def invalidUser(request, email):
+def invalidUser(request):
     page = loader.get_template('invalidUser.html')
     return HttpResponse(page.render())
 
@@ -40,7 +38,14 @@ def databaseSearchPage(request):
         print(form)
         if form.is_valid():
             email = form.cleaned_data['email']
-            #The value email will include the user's email input from the first page
+            password = form.cleaned_data['password']
+            #Verifies existance of user, if exists proceed to view DB, else display invalid User
+            with connection.cursor() as cursor:
+                cursor.execute('SELECT email, password FROM User WHERE email LIKE "' + email + '" AND password LIKE "' + password + '"')
+                u = cursor.fetchall()
+            cursor.close()
+            if len(u) != 1:
+                return HttpResponseRedirect('invalidUser')
     return HttpResponse(page.render())
 
 def displayReport1(request):
@@ -51,12 +56,11 @@ def displayReport1(request):
     return render(request, "reportPage1.html", {"Plant": plants})
 
 def displayReport2(request):
-    plants=Plant.objects.all()
-    #plants = Plant.objects.all().values('plantId','commonName','scientificName','yearLastDocumented','rankId','groupId','groupId__taxGroup','subgroupId','statusId')
     with connection.cursor() as cursor:
         cursor.execute("SELECT PlantID, CommonName, ScientificName, YearLastDocumented, Plant.StatusID AS StatusID, FederalListingStatus, StateListingStatus FROM Plant, ListingStatus WHERE Plant.StatusID = ListingStatus.StatusID")
         plantListing = cursor.fetchall()
     #print(plantListing)
+    cursor.close()
     return render(request, "reportPage2.html", {"PlantLocation": plantListing})
 
 def displayReport3(request):
