@@ -39,6 +39,14 @@ def displayReport1ORM(request):
     plants = Plant.objects.all().values('plantId','commonName','scientificName','yearLastDocumented','rankId','groupId','subgroupId','statusId').order_by('-yearLastDocumented')[:10]
     return render(request, "reportPage1ORM.html", {"Plant": plants})
 
+def addSighting(request):
+    sight = Sighting.objects.all()
+    return render(request, "addSighting.html", {"Sighting":sight})
+
+def updateRank(request):
+    rank = ConservationRank.objects.all()
+    return render(request, "updateRank.html", {"Rank":rank})
+
 def displayReport2(request):
     plants=Plant.objects.all()
     return render(request, "reportPage2.html", {"Plant": plants})

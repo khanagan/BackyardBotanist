@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<head>
+    <title>Add Plant Sighting</title>
+</head>
+<body>
+    <center>
+        <h1>Add Plant Sighting</h1>
+        <hr/>
+        <table border="1">
+            <tr>
+                <th>SightingID</th>
+                <th>UserID</th>
+                <th>PlantID</th>
+                <th>County</th>
+                <th>State</th>
+            </tr>
+            {% for displaysighting in Sighting %}
+            <tr>
+                <td>{{displaysighting.sightingId}}</td>
+                <td>{{displaysighting.userId}}</td>
+                <td>{{displaysighting.plantId}}</td>
+                <td>{{displaysighting.county}}</td>
+                <td>{{displaysighting.state}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </center>
+</body>
+</html>

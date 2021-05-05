@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<head>
+    <title>Update Rank</title>
+</head>
+<body>
+    <center>
+        <h1>Update Rank</h1>
+        <hr/>
+        <table border="1">
+            <tr>
+                <th>RankID</th>
+                <th>StateRank</th>
+                <th>GlobalRank</th>
+            </tr>
+            {% for displayrank in Rank %}
+            <tr>
+                <td>{{displayrank.rankId}}</td>
+                <td>{{displayrank.stateRank}}</td>
+                <td>{{displayrank.globalRank}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </center>
+</body>
+</html>
