@@ -177,7 +177,7 @@ def displayReport2(request):
 def displayReport3(request):
     groupNo = 3
     with connection.cursor() as cursor:
-        sql = ('SELECT CommonName, ScientificName '
+        sql = ('SELECT DISTINCT CommonName, ScientificName '
                'FROM TaxGroup RIGHT JOIN Plant ON Plant.groupId = TaxGroup.groupId '
                'WHERE TaxGroup.groupId = %s ')
         cursor.execute(sql, groupNo)
@@ -195,7 +195,7 @@ def groupSearchPage(request):
 def displayReport4(request):
     groupNo = 3
     with connection.cursor() as cursor:
-        sql = ('SELECT CommonName, ScientificName '
+        sql = ('SELECT DISTINCT CommonName, ScientificName '
                'FROM Subgroup RIGHT JOIN Plant ON Plant.groupId = Subgroup.groupId '
                'WHERE Subgroup.groupId = %s ')
         cursor.execute(sql, groupNo)
