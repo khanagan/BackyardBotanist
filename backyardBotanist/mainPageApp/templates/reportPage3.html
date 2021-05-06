@@ -8,25 +8,13 @@
         <hr/>
         <table border="1">
             <tr>
-                <th>PlantID</th>
-                <th>CommonName</th>
-                <th>ScientificName</th>
-                <th>YearLastDocumented</th>
-                <th>RankID</th>
-                <th>GroupID</th>
-                <th>SubgroupID</th>
-                <th>StatusID</th>
+                <th>Common Name</th>
+                <th>Scientific Name</th>
             </tr>
-            {% for displayplant in Plant %}
+            {% for CommonName, ScientificName in GroupList%}
             <tr>
-                <td>{{displayplant.plantId}}</td>
-                <td>{{displayplant.commonName}}</td>
-                <td>{{displayplant.scientificName}}</td>
-                <td>{{displayplant.yearLastDocumented}}</td>
-                <td>{{displayplant.rankId}}</td>        
-                <td>{{displayplant.groupId}}</td>
-                <td>{{displayplant.subgroupId}}</td>
-                <td>{{displayplant.statusId}}</td>
+                <td>{{CommonName}}</td>
+                <td>{{ScientificName}}</td>
             </tr>
             {% endfor %}
         </table>
