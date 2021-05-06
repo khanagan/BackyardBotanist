@@ -27,3 +27,8 @@ class addSightingForm(forms.Form):
     county = forms.CharField(max_length=30)
     state = forms.CharField(max_length=30)
 
+class groupForm(forms.Form):
+    group = forms.IntegerField()
+
+class subGroupForm(forms.Form):
+    subgroup = forms.CharField(max_length=30)
