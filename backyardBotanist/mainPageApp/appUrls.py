@@ -15,4 +15,6 @@ urlpatterns = [
     path('addSighting', views.addSighting, name='addSighting'),
     path('addedSighting', views.addedSighting, name='addedSighting'),
     path('databaseSearchPage', views.databaseSearchPage, name='databaseSearchPage'),
+    path('groupSearchPage', views.groupSearchPage, name='groupSearchPage'),
+    path('subGroupSearchPage', views.subGroupSearchPage, name='subGroupSearchPage'),
 ]
